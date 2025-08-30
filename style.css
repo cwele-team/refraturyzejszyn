@@ -2059,121 +2059,236 @@ margin-bottom: 1rem;
   }
 }
 
-/* Help Page Specific Styles */
+/* Help Page Specific Styles - Stylizacja strony pomocy */
 .help-page-main {
-  min-height: calc(100vh - 100px); /* Adjust based on navbar/footer height */
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   padding: 2rem;
-  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-.help-section {
-  max-width: 600px;
+.help-container {
   width: 100%;
+  max-width: 500px;
   background-color: var(--color-surface-light);
   border-radius: 1rem;
-  padding: 2.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  z-index: 10;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.help-title {
-  font-size: 2.5rem;
-  font-weight: 700;
+.help-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.help-logo {
+  width: 3rem;
+  height: 3rem;
   color: var(--color-primary);
   margin-bottom: 1rem;
 }
 
-.help-description {
-  color: var(--color-text-secondary);
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  line-height: 1.6;
+.help-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.help-subtitle {
+  color: #CCCCCC;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.help-form-box {
+  background-color: var(--color-surface-light);
 }
 
 .help-form .form-group {
   margin-bottom: 1.5rem;
-  text-align: left;
 }
 
 .help-form label {
   display: block;
-  margin-bottom: 0.75rem;
-  color: var(--color-text);
-  font-weight: 600;
-  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #CCCCCC;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
-.help-form input[type="email"],
-.help-form select,
-.help-form textarea {
+.help-form .input-icon {
+  position: relative;
+}
+
+.help-form .input-icon i {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #CCCCCC;
+  z-index: 1;
+}
+
+.help-form .input-icon input,
+.help-form .input-icon select {
   width: 100%;
-  padding: 0.8rem 1rem;
-  background-color: var(--color-surface-dark);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  background-color: #2a2a2a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 0.5rem;
   color: var(--color-text);
-  font-size: 1rem;
+  font-size: 16px;
+  min-height: 44px;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.help-form input[type="email"]:focus,
-.help-form select:focus,
-.help-form textarea:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.3);
-  outline: none;
+.help-form .input-icon input:focus,
+.help-form .input-icon select:focus {
+  border-color: #4A90E2;
+  outline: 2px solid #4A90E2;
+  outline-offset: 2px;
+}
+
+.help-form .textarea-wrapper {
+  position: relative;
+}
+
+.help-form .textarea-icon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: #CCCCCC;
+  z-index: 1;
 }
 
 .help-form textarea {
-  resize: vertical;
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  background-color: #2a2a2a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  font-size: 16px;
   min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.help-form .btn-primary {
-  width: auto;
-  padding: 0.8rem 2.5rem;
-  font-size: 1.1rem;
-  margin-top: 1.5rem;
+.help-form textarea:focus {
+  border-color: #4A90E2;
+  outline: 2px solid #4A90E2;
+  outline-offset: 2px;
 }
 
-.help-form .form-message {
-  margin-top: 1.5rem;
-  padding: 1rem;
+.help-form textarea::placeholder {
+  color: #888;
+}
+
+.help-submit {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border: none;
   border-radius: 0.5rem;
   font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-height: 44px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
-.help-form .form-message.success {
-  background-color: #22c55e;
-  color: white;
+.help-submit:hover {
+  background-color: var(--color-primary-dark);
 }
 
-.help-form .form-message.error {
-  background-color: #dc2626;
-  color: white;
+.help-submit:focus {
+  background-color: var(--color-primary-dark);
+  outline: 2px solid #FFD700;
+  outline-offset: 2px;
 }
 
+.help-back {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.alert-success {
+  background-color: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+}
+
+.alert-error {
+  background-color: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #dc2626;
+}
+
+.alert i {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* Responsive design for help page */
 @media (max-width: 768px) {
   .help-page-main {
     padding: 1rem;
+    align-items: flex-start;
+    padding-top: 6rem;
   }
 
-  .help-section {
+  .help-container {
     padding: 1.5rem;
   }
 
   .help-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
-  .help-description {
-    font-size: 1rem;
+  .help-subtitle {
+    font-size: 0.9rem;
   }
 
-  .help-form .btn-primary {
-    width: 100%;
+  .help-form textarea {
+    min-height: 100px;
   }
+}
+
+/* Select styling improvements */
+.help-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23CCCCCC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 16px;
+  padding-right: 3rem;
+}
+
+.help-form select:focus {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A90E2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
 }

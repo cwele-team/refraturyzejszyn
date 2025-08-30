@@ -129,47 +129,72 @@ $conn->close(); // Zamknij połączenie z bazą danych po wszystkich operacjach
 
     <!-- Main Content -->
     <main id="main-content" role="main" class="help-page-main">
-        <section class="help-section">
-            <h1 class="help-title">Centrum Pomocy</h1>
-            <p class="help-description">Wypełnij poniższy formularz, aby zgłosić problem lub zadać pytanie. Postaramy się odpowiedzieć jak najszybciej.</p>
+        <div class="help-container">
+            <div class="help-header">
+                <i data-lucide="help-circle" class="help-logo"></i>
+                <h1 class="help-title">Centrum Pomocy</h1>
+                <p class="help-subtitle">Wypełnij poniższy formularz, aby zgłosić problem lub zadać pytanie</p>
+            </div>
 
-            <form id="helpForm" class="help-form" action="pomoc.php" method="POST">
-                <div class="form-group">
-                    <label for="categorySelect">Wybierz kategorię problemu:</label>
-                    <select id="categorySelect" name="category" required>
-                        <?php if (empty($categories)): ?>
-                            <option value="">Brak dostępnych kategorii</option>
-                        <?php else: ?>
-                            <option value="">-- Wybierz kategorię --</option>
-                            <?php foreach ($categories as $cat): ?>
-                                <option value="<?php echo htmlspecialchars($cat['string_techniczna']); ?>"
-                                    <?php echo (isset($_POST['category']) && $_POST['category'] == $cat['string_techniczna']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($cat['string_techniczna']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="emailInput">Twój adres e-mail:</label>
-                    <input type="email" id="emailInput" name="email" placeholder="np. twoj.email@example.com" required value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
-                </div>
-
-                <div class="form-group">
-                    <label for="descriptionTextarea">Opisz swój problem:</label>
-                    <textarea id="descriptionTextarea" name="description" rows="8" placeholder="Szczegółowo opisz problem, z którym się zmagasz..." required><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Wyślij zgłoszenie</button>
+            <div class="help-form-box">
                 <?php if (!empty($formMessage)): ?>
-                    <div id="formMessage" class="form-message <?php echo $messageType; ?>" role="alert" aria-live="polite" style="display: block;">
-                        <?php echo htmlspecialchars($formMessage); ?>
+                    <div id="formMessage" class="alert <?php echo $messageType === 'success' ? 'alert-success' : 'alert-error'; ?>" role="alert" aria-live="polite">
+                        <i data-lucide="<?php echo $messageType === 'success' ? 'check-circle' : 'alert-circle'; ?>"></i>
+                        <span><?php echo htmlspecialchars($formMessage); ?></span>
                     </div>
                 <?php endif; ?>
-            </form>
 
-        </section>
+                <form id="helpForm" class="help-form" action="pomoc.php" method="POST">
+                    <div class="form-group">
+                        <label for="categorySelect">Kategoria problemu</label>
+                        <div class="input-icon">
+                            <i data-lucide="tag"></i>
+                            <select id="categorySelect" name="category" required>
+                                <?php if (empty($categories)): ?>
+                                    <option value="">Brak dostępnych kategorii</option>
+                                <?php else: ?>
+                                    <option value="">Wybierz kategorię problemu</option>
+                                    <?php foreach ($categories as $cat): ?>
+                                        <option value="<?php echo htmlspecialchars($cat['string_techniczna']); ?>"
+                                            <?php echo (isset($_POST['category']) && $_POST['category'] == $cat['string_techniczna']) ? 'selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($cat['string_techniczna']); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailInput">Adres e-mail</label>
+                        <div class="input-icon">
+                            <i data-lucide="mail"></i>
+                            <input type="email" id="emailInput" name="email" placeholder="twoj.email@example.com" required value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descriptionTextarea">Opis problemu</label>
+                        <div class="textarea-wrapper">
+                            <i data-lucide="message-square" class="textarea-icon"></i>
+                            <textarea id="descriptionTextarea" name="description" rows="6" placeholder="Szczegółowo opisz problem, z którym się zmagasz..." required><?php echo htmlspecialchars($_POST['description'] ?? ''); ?></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="help-submit">
+                        <i data-lucide="send"></i>
+                        <span>Wyślij zgłoszenie</span>
+                    </button>
+                </form>
+
+                <div class="help-back">
+                    <a href="index.php" class="back-link">
+                        <i data-lucide="arrow-left"></i>
+                        Powróć na stronę główną
+                    </a>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
